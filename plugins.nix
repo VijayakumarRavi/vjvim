@@ -2,6 +2,7 @@
 with pkgs.vimPlugins; [
   telescope-nvim
   catppuccin-nvim
+  neo-tree-nvim
   harpoon
   mason-nvim
   mason-lspconfig-nvim
