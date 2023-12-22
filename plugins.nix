@@ -9,5 +9,5 @@ with pkgs.vimPlugins; [
   lualine-nvim
   telescope-ui-select-nvim
   telescope-nvim
-  nvim-treesitter
+  nvim-treesitter.withAllGrammars
 ]
