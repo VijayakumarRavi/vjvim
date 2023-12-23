@@ -23,8 +23,11 @@
   };
   outputs = { self, nixpkgs, neovim }:
     let
-      overlayFlakeInputs = prev: final: {
+      overlayFlakeInputsDarwin = prev: final: {
         neovim = neovim.packages.aarch64-darwin.neovim;
+      };
+      overlayFlakeInputsLinux = prev: final: {
+        neovim = neovim.packages.x86_64-linux.neovim;
       };
 
       overlayvjvim = prev: final: {
@@ -33,24 +36,41 @@
         };
       };
 
-      pkgs = import nixpkgs {
+      pkgsdarwin = import nixpkgs {
         system = "aarch64-darwin";
         name = "vjvim";
-        overlays = [ overlayFlakeInputs overlayvjvim ];
+        overlays = [ overlayFlakeInputsDarwin overlayvjvim ];
+      };
+      pkgslinux = import nixpkgs {
+        system = "x86_64-linux";
+        name = "vjvim";
+        overlays = [ overlayFlakeInputsLinux overlayvjvim ];
       };
 
     in {
-      packages.aarch64-darwin.default = pkgs.vjvim;
-      packages.aarch64-darwin.vjvim = pkgs.vjvim;
+      packages.aarch64-darwin.default = pkgsdarwin.vjvim;
+      packages.aarch64-darwin.vjvim = pkgsdarwin.vjvim;
       apps.aarch64-darwin.default = {
         type = "app";
         name = "vjvim";
-        program = "${pkgs.vjvim}/bin/nvim";
+        program = "${pkgsdarwin.vjvim}/bin/nvim";
       };
       apps.aarch64-darwin.vjvim = {
         type = "app";
         name = "vjvim";
-        program = "${pkgs.vjvim}/bin/nvim";
+        program = "${pkgsdarwin.vjvim}/bin/nvim";
+      };
+      packages.x86_64-linux.default = pkgslinux.vjvim;
+      packages.x86_64-linux.vjvim = pkgslinux.vjvim;
+      apps.x86_64-linux.default = {
+        type = "app";
+        name = "vjvim";
+        program = "${pkgslinux.vjvim}/bin/nvim";
+      };
+      apps.x86_64-linux.vjvim = {
+        type = "app";
+        name = "vjvim";
+        program = "${pkgslinux.vjvim}/bin/nvim";
       };
     };
 }
