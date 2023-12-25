@@ -49,25 +49,13 @@
 
     in {
       packages.aarch64-darwin.default = pkgsdarwin.vjvim;
-      packages.aarch64-darwin.vjvim = pkgsdarwin.vjvim;
       apps.aarch64-darwin.default = {
         type = "app";
         name = "vjvim";
         program = "${pkgsdarwin.vjvim}/bin/nvim";
       };
-      apps.aarch64-darwin.vjvim = {
-        type = "app";
-        name = "vjvim";
-        program = "${pkgsdarwin.vjvim}/bin/nvim";
-      };
       packages.x86_64-linux.default = pkgslinux.vjvim;
-      packages.x86_64-linux.vjvim = pkgslinux.vjvim;
       apps.x86_64-linux.default = {
-        type = "app";
-        name = "vjvim";
-        program = "${pkgslinux.vjvim}/bin/nvim";
-      };
-      apps.x86_64-linux.vjvim = {
         type = "app";
         name = "vjvim";
         program = "${pkgslinux.vjvim}/bin/nvim";
