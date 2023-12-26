@@ -23,7 +23,7 @@ vim.cmd("highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7")
 vim.cmd("highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7")
 vim.cmd("highlight! TabLineFill guibg=NONE guifg=white")
 
--- mason 
+-- mason
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = { "lua_ls", "nil_ls", "rust_analyzer" }
@@ -117,6 +117,12 @@ if vim.fn.has("autocmd") then
     autocmd BufReadPost * lua RestoreCursorPosition()
   ]])
 end
+
+-- Remove trailing whitespace on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
