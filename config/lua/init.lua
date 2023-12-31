@@ -161,6 +161,15 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" },
+    {
+      name = 'spell',
+      option = {
+        keep_all_entries = false,
+        enable_in_context = function()
+          return true
+        end,
+      },
+    },
   }, {
     { name = "buffer" },
   }),
@@ -177,6 +186,8 @@ vim.cmd("set clipboard=unnamedplus ")
 vim.cmd("set nohlsearch")
 vim.cmd("set incsearch")
 vim.cmd("set ignorecase")
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
 
 vim.g.mapleader = " "
 

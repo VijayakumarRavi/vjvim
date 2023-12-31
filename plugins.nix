@@ -16,6 +16,7 @@ with pkgs.vimPlugins;
   cmp_luasnip
   cmp-nvim-lsp
   nvim-cmp
+  cmp-spell
 
   # LSP
   mason-nvim
@@ -25,4 +26,4 @@ with pkgs.vimPlugins;
 
   # formatter
   conform-nvim
-] ++ [ pkgs.nixfmt pkgs.stylua]
+] ++ [ pkgs.nixfmt pkgs.stylua ]
