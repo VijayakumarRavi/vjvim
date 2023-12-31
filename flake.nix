@@ -13,9 +13,7 @@
     ];
   };
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs";
-    };
+    nixpkgs = { url = "github:NixOS/nixpkgs"; };
     neovim = {
       url = "github:neovim/neovim/stable?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,9 +29,7 @@
       };
 
       overlayvjvim = prev: final: {
-        vjvim = import ./packages/vjvim.nix {
-          pkgs = final;
-        };
+        vjvim = import ./packages/vjvim.nix { pkgs = final; };
       };
 
       pkgsdarwin = import nixpkgs {
@@ -46,7 +42,6 @@
         name = "vjvim";
         overlays = [ overlayFlakeInputsLinux overlayvjvim ];
       };
-
     in {
       packages.aarch64-darwin.default = pkgsdarwin.vjvim;
       apps.aarch64-darwin.default = {

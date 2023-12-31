@@ -1,5 +1,43 @@
 -- catppuccin theme
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme("catppuccin")
+
+-- alpha dashboard
+
+local alpha = require("alpha")
+local startify = require("alpha.themes.startify")
+
+startify.section.header.val = {
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                     ]],
+  [[       ████ ██████           █████      ██                     ]],
+  [[      ███████████             █████                             ]],
+  [[      █████████ ███████████████████ ███   ███████████   ]],
+  [[     █████████  ███    █████████████ █████ ██████████████   ]],
+  [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+  [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+  [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+  [[                                                                       ]],
+}
+
+--_Gopts = {
+--  position = "center",
+--  hl = "Type",
+--  -- wrap = "overflow";
+--}
+
+startify.opts.opts.position = "center"
+-- startify.section.footer.val = footer()
+
+startify.opts.opts.noautocmd = true
+alpha.setup(startify.opts)
 
 -- Harpoon keymaps
 vim.keymap.set("n", "A", ':lua require("harpoon.mark").add_file()<CR>', {})
@@ -26,45 +64,54 @@ vim.cmd("highlight! TabLineFill guibg=NONE guifg=white")
 -- mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "nil_ls", "rust_analyzer" }
+  ensure_installed = { "lua_ls", "nil_ls", "rust_analyzer" },
+  automatic_installation = true,
 })
 -- lspconfig
 local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({})
-lspconfig.nil_ls.setup({})
-lspconfig.rust_analyzer.setup({})
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+lspconfig.lua_ls.setup({
+  capabilites = capabilities,
+})
+lspconfig.nil_ls.setup({
+  capabilites = capabilities,
+})
+lspconfig.rust_analyzer.setup({
+  capabilites = capabilities,
+})
+
 -- lsp keymaps
-vim.keymap.set('n', '<C-h>', vim.lsp.buf.hover, {})
-vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, {})
-vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {})
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+vim.keymap.set("n", "<C-h>", vim.lsp.buf.hover, {})
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
 -- lualine
 require("lualine").setup({
   options = {
-    theme = 'catppuccin'
-  }
+    theme = "catppuccin",
+  },
 })
 
 --  neotree
-vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>', {})
-vim.keymap.set('n', '<leader>bf', ':Neotree buffers reveal float<CR>', {})
+vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", {})
+vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
 
 -- telescope keymaps & setup
 require("telescope").setup({
   extensions = {
-    ['ui-select'] = {
-      require("telescope.themes").get_dropdown {
-      }
-    }
-  }
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({}),
+    },
+  },
 })
 local builtin = require("telescope.builtin")
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 
 require("telescope").load_extension("ui-select")
-require("telescope").load_extension('harpoon')
+require("telescope").load_extension("harpoon")
 
 -- treesitter
 
@@ -75,6 +122,51 @@ config.setup({
   indent = { enable = true },
 })
 
+-- Conform will formate code on write
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    nix = { "nixfmt" },
+    terraform = { "terraform_fmt" },
+  },
+  format_on_save = {
+    -- I recommend these options. See :help conform.format for details.
+    lsp_fallback = true,
+    timeout_ms = 500,
+  },
+})
+
+-- completion config
+
+require("luasnip.loaders.from_vscode").lazy_load()
+
+local cmp = require("cmp")
+cmp.setup({
+  window = {
+    documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+  },
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  }, {
+    { name = "buffer" },
+  }),
+})
+
+-- vim options
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
@@ -89,14 +181,14 @@ vim.cmd("set ignorecase")
 vim.g.mapleader = " "
 
 -- Navigate vim panes better
-vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
-vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
-vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
+vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
+vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
+vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
+vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 
 -- ease of use saveing
-vim.keymap.set('i', '<c-s>', '<esc>:w<cr>')
-vim.keymap.set('n', '<c-s>', ':w<cr>')
+vim.keymap.set("i", "<c-s>", "<esc>:w<cr>")
+vim.keymap.set("n", "<c-s>", ":w<cr>")
 
 -- last cursor position
 -- When editing a file, always jump to the last known cursor position.
@@ -107,7 +199,12 @@ vim.keymap.set('n', '<c-s>', ':w<cr>')
 -- them to have dual nature, so to speak)
 function RestoreCursorPosition()
   local line = vim.fn.line("'\"")
-  if line > 1 and line <= vim.fn.line("$") and vim.bo.filetype ~= 'commit' and vim.fn.index({'xxd', 'gitrebase'}, vim.bo.filetype) == -1 then
+  if
+      line > 1
+      and line <= vim.fn.line("$")
+      and vim.bo.filetype ~= "commit"
+      and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
+  then
     vim.cmd('normal! g`"')
   end
 end
@@ -124,6 +221,5 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
-vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.wo.number = true
-
