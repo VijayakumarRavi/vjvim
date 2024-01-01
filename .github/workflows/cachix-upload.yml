@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
 jobs:
-  tests:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -15,6 +15,6 @@ jobs:
         name: vjvim
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build --extra-experimental-features 'nix-command flakes' --json | jq -r '.[].outputs | to_entries[].value' | cachix push vjvim
+    - run: nix build --accept-flake-config --extra-experimental-features 'nix-command flakes' --json | jq -r '.[].outputs | to_entries[].value' | cachix push vjvim
     - run: nix-shell --run "echo OK"
 
