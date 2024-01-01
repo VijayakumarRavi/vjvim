@@ -2,14 +2,14 @@
   description = "Vijay's Neovim (vjvim) Configuration";
   nixConfig = {
     extra-substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      "https://vjvim.cachix.org"
+      "https://vjvim.cachix.org?priority=1"
+      "https://nix-community.cachix.org?priority=2"
+      "https://cache.nixos.org?priority=3"
     ];
     extra-trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "vjvim.cachix.org-1:AF3grdItpExuZ95D16gb7DN/9kYhf91OwZoNBCfHW98="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
   };
   inputs = {
