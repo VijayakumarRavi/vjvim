@@ -1,27 +1,32 @@
 { pkgs }:
 with pkgs.vimPlugins;
 [
-  telescope-nvim
-  catppuccin-nvim
-  neo-tree-nvim
+  # UI
   alpha-nvim
-  harpoon
   lualine-nvim
-  telescope-ui-select-nvim
+  catppuccin-nvim
+
+  # file explorer & fuzzy finders
+  harpoon
+  neo-tree-nvim
   telescope-nvim
+  telescope-ui-select-nvim
+
+  # usage tracker
+  vim-wakatime
 
   # completion & snippets
   luasnip
-  friendly-snippets
-  cmp_luasnip
-  cmp-nvim-lsp
   nvim-cmp
   cmp-spell
+  cmp_luasnip
+  cmp-nvim-lsp
+  friendly-snippets
 
   # LSP
   mason-nvim
-  mason-lspconfig-nvim
   nvim-lspconfig
+  mason-lspconfig-nvim
   nvim-treesitter.withAllGrammars
 
   # formatter
