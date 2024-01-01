@@ -6,16 +6,17 @@ with pkgs.vimPlugins;
   lualine-nvim
   catppuccin-nvim
 
-  # file explorer & fuzzy finders
+  # File explorer & fuzzy finders
   harpoon
   neo-tree-nvim
   telescope-nvim
   telescope-ui-select-nvim
 
-  # usage tracker
+  # Utils
   vim-wakatime
+  diffview-nvim
 
-  # completion & snippets
+  # Completion & snippets
   luasnip
   nvim-cmp
   cmp-spell
@@ -29,6 +30,6 @@ with pkgs.vimPlugins;
   mason-lspconfig-nvim
   nvim-treesitter.withAllGrammars
 
-  # formatter
+  # Formatter
   conform-nvim
 ] ++ [ pkgs.nixfmt pkgs.stylua ]

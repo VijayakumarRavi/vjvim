@@ -175,6 +175,27 @@ cmp.setup({
   }),
 })
 
+-- Diff view
+require("diffview").setup({
+  enhanced_diff_hl = true,             -- See ':h diffview-config-enhanced_diff_hl'
+  file_panel = {
+    listing_style = "tree",            -- One of 'list' or 'tree'
+    tree_options = {                   -- Only applies when listing_style is 'tree'
+      flatten_dirs = true,             -- Flatten dirs that only contain one single dir
+      folder_statuses = "only_folded", -- One of 'never', 'only_folded' or 'always'.
+    },
+    win_config = {                     -- See ':h diffview-config-win_config'
+      position = "left",
+      width = 25,
+      win_opts = {}
+    },
+  },
+})
+
+vim.keymap.set("n", "<C-d>", ":DiffviewOpen<CR>")
+vim.keymap.set("n", "<C-t>", ":tabclose<CR>")
+vim.keymap.set("n", "<S-t>", ":tabnew<CR>")
+
 -- vim options
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
@@ -188,6 +209,10 @@ vim.cmd("set incsearch")
 vim.cmd("set ignorecase")
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
+
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 vim.g.mapleader = " "
 
@@ -231,6 +256,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
-
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
-vim.wo.number = true
