@@ -16,5 +16,5 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build --accept-flake-config --extra-experimental-features 'nix-command flakes' --json | jq -r '.[].outputs | to_entries[].value' | cachix push vjvim
-    - run: nix run . -- -v
+    - run: nix run --accept-flake-config . -- -v
 
