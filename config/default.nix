@@ -14,8 +14,8 @@ let
     (builtins.attrNames (builtins.readDir configDir));
 
   sourceConfigFiles = files:
-    builtins.concatStringsSep "\n" (builtins.map (file:
-      "source ${file}") files);
+    builtins.concatStringsSep "\n"
+    (builtins.map (file: "source ${file}") files);
 
   #vim = scripts2ConfigFiles "vim";
   lua = scripts2ConfigFiles "lua";
