@@ -14,46 +14,40 @@
   };
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs"; };
+    flake-utils.url = "github:numtide/flake-utils";
     neovim = {
       url = "github:neovim/neovim/stable?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, neovim }:
-    let
-      overlayFlakeInputsDarwin = prev: final: {
-        neovim = neovim.packages.aarch64-darwin.neovim;
-      };
-      overlayFlakeInputsLinux = prev: final: {
-        neovim = neovim.packages.x86_64-linux.neovim;
-      };
+  outputs = { self, nixpkgs, neovim, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        overlayFlakeInputs = prev: final: {
+          neovim = neovim.packages.${system}.neovim;
+        };
 
-      overlayvjvim = prev: final: {
-        vjvim = import ./packages/vjvim.nix { pkgs = final; };
-      };
+        overlayvjvim = prev: final: {
+          vjvim = import ./packages/vjvim.nix { pkgs = final; };
+        };
 
-      pkgsdarwin = import nixpkgs {
-        system = "aarch64-darwin";
-        name = "vjvim";
-        overlays = [ overlayFlakeInputsDarwin overlayvjvim ];
-      };
-      pkgslinux = import nixpkgs {
-        system = "x86_64-linux";
-        name = "vjvim";
-        overlays = [ overlayFlakeInputsLinux overlayvjvim ];
-      };
-    in {
-      packages.aarch64-darwin.default = pkgsdarwin.vjvim;
-      apps.aarch64-darwin.default = {
-        type = "app";
-        name = "vjvim";
-        program = "${pkgsdarwin.vjvim}/bin/nvim";
-      };
-      packages.x86_64-linux.default = pkgslinux.vjvim;
-      apps.x86_64-linux.default = {
-        type = "app";
-        name = "vjvim";
-        program = "${pkgslinux.vjvim}/bin/nvim";
-      };
-    };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ overlayFlakeInputs overlayvjvim ];
+        };
+
+      in {
+        packages = rec {
+          vjvim = pkgs.vjvim;
+          default = vjvim;
+        };
+        apps = rec {
+          default = vjvim;
+          vjvim = flake-utils.lib.mkApp {
+            drv = self.packages.${system}.vjvim;
+            name = "vjvim";
+            exePath = "/bin/nvim";
+          };
+        };
+      });
 }
