@@ -6,6 +6,5 @@ nix build --json \
   | jq -r '.[].outputs | to_entries[].value' \
   | cachix push vjvim
 echo "Diff with $OLDRESULT"
-nix store diff-closures "$OLDRESULT" ./result |grep '→'
-#nix store diff-closures "$OLDRESULT" ./result |grep -Ev '[∅ε]' |grep '→'
-
+# nix store diff-closures "$OLDRESULT" ./result | grep '→'
+nix store diff-closures "$OLDRESULT" ./result | grep -Ev '[∅ε]' | grep '→'

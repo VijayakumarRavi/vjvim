@@ -12,42 +12,64 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
   };
+
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs"; };
-    flake-utils.url = "github:numtide/flake-utils";
-    neovim = {
-      url = "github:neovim/neovim/stable?dir=contrib";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, neovim, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        overlayFlakeInputs = prev: final: {
-          neovim = neovim.packages.${system}.neovim;
-        };
 
-        overlayvjvim = prev: final: {
-          vjvim = import ./packages/vjvim.nix { pkgs = final; };
-        };
+  outputs = {
+    nixpkgs,
+    nixvim,
+    flake-parts,
+    pre-commit-hooks,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
 
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ overlayFlakeInputs overlayvjvim ];
+      perSystem = {
+        system,
+        pkgs,
+        self',
+        lib,
+        ...
+      }: let
+        nixvim' = nixvim.legacyPackages.${system};
+        nvim = nixvim'.makeNixvimWithModule {
+          inherit pkgs;
+          module = ./config;
         };
-
       in {
-        packages = rec {
-          vjvim = pkgs.vjvim;
-          default = vjvim;
-        };
-        apps = rec {
-          default = vjvim;
-          vjvim = flake-utils.lib.mkApp {
-            drv = self.packages.${system}.vjvim;
-            name = "vjvim";
-            exePath = "/bin/nvim";
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              statix.enable = true;
+              alejandra.enable = true;
+            };
           };
         };
-      });
+        formatter = pkgs.alejandra;
+        packages.default = nvim;
+        devShells = {
+          default = with pkgs; mkShell {inherit (self'.checks.pre-commit-check) shellHook;};
+        };
+      };
+    };
 }
