@@ -1,11 +1,15 @@
-name: "Build and upload cache to cachix"
+name: "Build, test, and cache"
 on:
   pull_request:
   push:
+
 jobs:
-  TestAndCache:
-    name: Test and Cache to Cachix
-    runs-on: ubuntu-latest
+  build-and-test:
+    name: Build and Test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -13,11 +17,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: DeterminateSystems/nix-installer-action@v9
         with:
-          # We set our custom GitHub token for any private flake inputs we might have
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # We add all the config for extra platforms, other binary caches and to raise the number of connections that can be made
           extra-conf: |
             fallback = true
             http-connections = 128
@@ -28,8 +30,7 @@ jobs:
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
 
       - name: Enable Github Cache for Nix store
-        id: nix-cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
+        uses: DeterminateSystems/magic-nix-cache-action@v2        
 
       - name: Enable Cachix binary cache
         uses: cachix/cachix-action@v15
@@ -42,3 +43,16 @@ jobs:
 
       - name: Run and test the config
         run: nix run . -- -v
+
+      - name: Commit and Push updated flake.lock
+        if: matrix.os == 'ubuntu-latest'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Bot 🤖(flake): bump flake.lock"
+          commit_user_name: Flake Bot
+          commit_options: --no-verify --signoff
+          commit_author: Flake Bot <github-actions@github.com>
+          branch: master
+          file_pattern: flake.lock
+          skip_dirty_check: false
+          skip_fetch: true
