@@ -29,7 +29,6 @@
   };
 
   outputs = {
-    nixpkgs,
     nixvim,
     flake-parts,
     pre-commit-hooks,
@@ -56,19 +55,54 @@
           module = ./config;
         };
       in {
+        packages.default = nvim;
+
+        formatter = pkgs.alejandra;
+
+        devShells = {
+          default = with pkgs;
+            mkShell {
+              inherit (self'.checks.pre-commit-check) shellHook;
+              buildInputs = self'.checks.pre-commit-check.enabledPackages;
+            };
+        };
+
         checks = {
           pre-commit-check = pre-commit-hooks.lib.${system}.run {
             src = ./.;
             hooks = {
-              statix.enable = true;
               alejandra.enable = true;
+              actionlint.enable = true;
+              shellcheck.enable = true;
+              flake-checker.enable = true;
+              check-symlinks.enable = true;
+              end-of-file-fixer.enable = true;
+              detect-private-keys.enable = true;
+              trim-trailing-whitespace.enable = true;
+              trim-trailing-whitespace.stages = ["pre-commit"];
+              deadnix = {
+                enable = true;
+                settings = {
+                  edit = true;
+                  noLambdaArg = true;
+                };
+              };
+              statix = {
+                enable = true;
+                files = "\\.nix$";
+                name = "statix-fix";
+                entry = "statix fix";
+              };
+              git-pull = {
+                enable = true;
+                name = "git-pull-remort";
+                always_run = true;
+                pass_filenames = false;
+                stages = ["post-commit"];
+                entry = "git pull --rebase --quiet --autostash";
+              };
             };
           };
-        };
-        formatter = pkgs.alejandra;
-        packages.default = nvim;
-        devShells = {
-          default = with pkgs; mkShell {inherit (self'.checks.pre-commit-check) shellHook;};
         };
       };
     };
