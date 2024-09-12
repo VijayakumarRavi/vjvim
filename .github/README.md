@@ -95,28 +95,6 @@ configuration (`home.packges = with pkgs; [ neovim ]`), but you replace
 You can just straight up alias something like `nix run
 'github:vijayakumarravi/vjvim'` to `nvim` or `vi` or `vim`.
 
-### Bonus extend method
-
-If you want to extend this config is your own NixOS config, you can do so using `nixvimExtend`. See [here](https://nix-community.github.io/vjvimm/modules/standalone.html) for more info.
-
-Example for overwritting the theme
-
-```nix
-{
-  inputs,
-  lib,
-  ...
-}: let
-  nixvim' = inputs.nixvim.packages."x86_64-linux".default;
-  nvim = nixvim'.nixvimExtend {
-    config.theme = lib.mkForce "jellybeans";
-  };
-in {
-  home.packages = [
-    nvim
-  ];
-}
-```
 ## Credits
 
 * Thanks to [webmessia-h/nixvi](https://github.com/webmessia-h/nixvi) 

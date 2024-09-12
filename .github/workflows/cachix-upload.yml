@@ -6,15 +6,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v20
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-    - uses: cachix/cachix-action@v12
-      with:
-        name: vjvim
-        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build --accept-flake-config --extra-experimental-features 'nix-command flakes' --json | jq -r '.[].outputs | to_entries[].value' | cachix push vjvim
-    - run: nix run --accept-flake-config . -- -v
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - name: Setup Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          # We set our custom GitHub token for any private flake inputs we might have
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # We add all the config for extra platforms, other binary caches and to raise the number of connections that can be made
+          extra-conf: |
+            fallback = true
+            http-connections = 128
+            max-substitution-jobs = 128
+            accept-flake-config = true
+            extra-platforms = aarch64-linux
+            substituters = https://nix-community.cachix.org?priority=41 https://numtide.cachix.org?priority=42 https://cache.nixos.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
+
+      - name: Enable Github Cache for Nix store
+        id: nix-cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Enable Cachix binary cache
+        uses: cachix/cachix-action@v15
+        with:
+          name: vijay
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Update flake.lock
+        run: nix flake update
+
+      - run: nix build --extra-experimental-features 'nix-command flakes' --json | jq -r '.[].outputs | to_entries[].value' | cachix push vijay
+
+      - run: nix run . -- -v
