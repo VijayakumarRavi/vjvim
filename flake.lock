@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "Plugin-hlchunk-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1726129163,
+        "narHash": "sha256-f8nod1MVFjANGiYGvaDTjMIgtHrjXWxuUEzHM8bAkW8=",
+        "owner": "shellRaining",
+        "repo": "hlchunk.nvim",
+        "rev": "6c25dbc174d6bdecee6cbeab1d7a783fd2c407ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shellRaining",
+        "repo": "hlchunk.nvim",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -342,6 +358,7 @@
     },
     "root": {
       "inputs": {
+        "Plugin-hlchunk-nvim": "Plugin-hlchunk-nvim",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",

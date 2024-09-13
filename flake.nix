@@ -26,6 +26,11 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    Plugin-hlchunk-nvim = {
+      url = "github:shellRaining/hlchunk.nvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -53,6 +58,9 @@
         nvim = nixvim'.makeNixvimWithModule {
           inherit pkgs;
           module = ./config;
+          extraSpecialArgs = {
+            inherit inputs;
+          };
         };
       in {
         packages.default = nvim;

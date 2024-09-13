@@ -1,4 +1,8 @@
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   plugins = {
     leap.enable = true;
 
@@ -53,6 +57,25 @@
       };
     };
   };
+
+  ## highlight the indent line
+  extraPlugins = [
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "hlchunk";
+      src = inputs.Plugin-hlchunk-nvim;
+    })
+  ];
+
+  extraConfigLua = ''
+    require('hlchunk').setup({
+      chunk = {
+        enable = false
+      },
+      indent = {
+        enable = true
+      }
+    })
+  '';
 
   keymaps = [
     {
