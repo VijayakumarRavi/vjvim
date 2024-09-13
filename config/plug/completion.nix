@@ -119,7 +119,7 @@
             Event = "",
             Operator = "",
             TypeParameter = "",
-          } 
+          }
 
            local cmp = require'cmp'
 

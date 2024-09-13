@@ -21,7 +21,7 @@
       incsearch = true;
 
       # Enable text wrap
-      wrap = true;
+      wrap = false;
 
       # Better splitting
       splitbelow = true;

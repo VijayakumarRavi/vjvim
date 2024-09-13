@@ -97,4 +97,4 @@ You can just straight up alias something like `nix run
 
 ## Credits
 
-* Thanks to [webmessia-h/nixvi](https://github.com/webmessia-h/nixvi) 
+* Thanks to [webmessia-h/nixvi](https://github.com/webmessia-h/nixvi)
