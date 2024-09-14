@@ -4,6 +4,9 @@
     settings = {
       useDefaultKeymaps = true;
       deleteToTrash = true;
+      view_options = {
+        show_hidden = true;
+      };
       float = {
         padding = 2;
         maxWidth = 0; # ''math.ceil(vim.o.lines * 0.8 - 4)'';
