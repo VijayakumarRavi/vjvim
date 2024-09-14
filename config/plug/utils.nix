@@ -8,6 +8,9 @@
 
     nvim-autopairs = {
       enable = true;
+      settings = {
+        event = "InsertEnter";
+      };
     };
 
     ## commenting plugin for neovim
@@ -58,15 +61,21 @@
     };
   };
 
-  ## highlight the indent line
   extraPlugins = [
+    ## highlight the indent line
     (pkgs.vimUtils.buildVimPlugin {
       name = "hlchunk";
       src = inputs.Plugin-hlchunk-nvim;
     })
+    ## surround plugin
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "visual-surround-nvim";
+      src = inputs.Plugin-visual-surround-nvim;
+    })
   ];
 
   extraConfigLua = ''
+    -- Configuration for hlchunk
     require('hlchunk').setup({
       chunk = {
         enable = false
@@ -75,6 +84,20 @@
         enable = true
       }
     })
+
+    -- Configuration for visual-surround-nvim
+    require("visual-surround").setup({
+    use_default_keymaps = false,
+    })
+
+    local prefix = "s"
+    local surround_chars = { "{", "}", "[", "]", "(", ")", "'", '"', "<", "*" }
+    local surround = require("visual-surround").surround
+    for _, key in pairs(surround_chars) do
+        vim.keymap.set("v", prefix .. key, function()
+            surround(key)
+        end, { desc = "[visual-surround] Surround selection with " .. key })
+    end
   '';
 
   keymaps = [

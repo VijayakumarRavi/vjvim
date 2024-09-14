@@ -31,6 +31,11 @@
       url = "github:shellRaining/hlchunk.nvim";
       flake = false;
     };
+
+    Plugin-visual-surround-nvim = {
+      url = "github:NStefan002/visual-surround.nvim";
+      flake = false;
+    };
   };
 
   outputs = {

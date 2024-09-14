@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "Plugin-visual-surround-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705254616,
+        "narHash": "sha256-662YJiKDrcZvbxx1rLNlBURLrjf+QYDvYEUFbJm70vU=",
+        "owner": "NStefan002",
+        "repo": "visual-surround.nvim",
+        "rev": "ab8b7087793366c000e3b8a7ead6f84bc564347d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NStefan002",
+        "repo": "visual-surround.nvim",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -359,6 +375,7 @@
     "root": {
       "inputs": {
         "Plugin-hlchunk-nvim": "Plugin-hlchunk-nvim",
+        "Plugin-visual-surround-nvim": "Plugin-visual-surround-nvim",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
