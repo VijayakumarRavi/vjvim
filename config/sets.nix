@@ -17,7 +17,7 @@
       breakindent = true;
 
       # Enable incremental searching
-      hlsearch = true;
+      hlsearch = false;
       incsearch = true;
 
       # Enable text wrap
@@ -51,10 +51,10 @@
       termguicolors = true;
 
       # Enable the sign column to prevent the screen from jumping
-      # signcolumn = "yes";
+      signcolumn = "yes";
 
-      # Enable cursor line highlight
-      cursorline = true; # Highlight the line where the cursor is located
+      # Highlight the line where the cursor is located
+      cursorline = true;
 
       # Always keep 10 lines above/below cursor unless at start/end of file
       scrolloff = 10;
@@ -68,7 +68,6 @@
 
       # Clipboard provider
       clipboard.register = "unnamedplus";
-      clipboard.providers.wl-copy.enable = true;
     };
     extraConfigVim = ''
         if has("persistent_undo")

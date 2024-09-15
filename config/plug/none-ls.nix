@@ -14,6 +14,7 @@
         statix.enable = true;
         yamllint.enable = true;
         codespell.enable = true;
+        actionlint.enable = true;
       };
       formatting = {
         alejandra.enable = true;
@@ -26,6 +27,7 @@
             }
           '';
         };
+        just.enable = true;
         stylua.enable = true;
         yamlfmt.enable = true;
       };

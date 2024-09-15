@@ -9,13 +9,15 @@
       servers = {
         lua-ls = {
           enable = true;
+          settings.diagnostics.globals = ["vim"];
         };
-        nil-ls = {
-          enable = true;
-        };
-        yamlls = {
-          enable = true;
-        };
+        nil-ls.enable = true;
+        yamlls.enable = true;
+        jsonls.enable = true;
+        ansiblels.enable = true;
+        typos-lsp.enable = true;
+        dockerls.enable = true;
+        docker-compose-language-service.enable = true;
       };
       keymaps = {
         silent = true;
