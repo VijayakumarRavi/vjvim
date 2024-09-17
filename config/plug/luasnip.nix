@@ -19,62 +19,22 @@
     local t = ls.text_node
     local i = ls.insert_node
 
-    -- Basic Nix expression
-    ls.add_snippets("nix", {
-      s("nixbase", {
-        t("{...}: {"),
-        t({"", "  "}), i(1, ""),  -- Placeholder for adding key-value pairs
-        t({"", "}"}),
-      }),
-    })
-
-    -- Nix derivation snippet
-    ls.add_snippets("nix", {
-      s("mkdrv", {
-        t("stdenv.mkDerivation rec {"),
-        t({"", "  pname = \""}), i(1, ""), t("\";"),
-        t({"", "  version = \""}), i(2, ""), t("\";"),
-        t({"", "", "  src = fetchurl {"}),
-        t({"", "    url = \""}), i(3, ""), t("\";"),
-        t({"", "    sha256 = \""}), i(4, ""), t("\";"),
-        t({"  };", "", "  buildInputs = [ "}),
-        i(5, ""), t(" ];"),
-        t({"", "};"}),
-      }),
-    })
-
-    -- Shell.nix setup
-    ls.add_snippets("nix", {
-      s("shell", {
-        t("{ pkgs ? import <nixpkgs> {} }:"),
-        t({"", "", "pkgs.mkShell {"}),
-        t({"  buildInputs = [ "}),
-        i(1, ""), t(" ];"),
-        t({"", "};"}),
-      }),
-    })
-
-    -- Importing nixpkgs snippet
-    ls.add_snippets("nix", {
-      s("importpkgs", {
-        t("let"),
-        t({"", "  pkgs = import <nixpkgs> {} ;"}),
-        t({"", "in"}),
-        t({"", "{", "  "}), i(1, "# Your expression here"),
-        t({"", "}"}),
-      }),
-    })
-
     -- NixOS Module Declaration
     ls.add_snippets("nix", {
-      s("nixosmod", {
-        t("{ config, lib, pkgs, ... }:"),
-        t({"", "{", "  options = {};"}),
-        t({"", "  config = {};"}),
-        t({"", "}"}),
+      s("{}", {
+        t({"{"}),
+        t({"","  config,"}),
+        t({"","  lib,"}),
+        t({"","  pkgs,"}),
+        t({"","  ..."}),
+        t({"","}: {"}),
+        t({"", "  "}), i(1, ""),
+        t({"", " "}),
       }),
     })
 
+    -- Function to insert a snippet template
+    -- https://github.com/voyeg3r/nvim/blob/e80df68beece2165fa1afbb1bc590650a66eb302/lua/core/utils.lua#L231
     insert_snippet_template = function(snip_name)
       local snips = require('luasnip').get_snippets()[vim.bo.filetype]
       if snips then
@@ -98,7 +58,7 @@
         require('cmp').setup({})
         vim.api.nvim_create_autocmd('VimEnter', {
           callback = function()
-            insert_snippet_template("nixbase")
+            insert_snippet_template("{")
           end,
         })
       end,
