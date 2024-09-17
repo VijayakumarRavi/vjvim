@@ -68,7 +68,10 @@
           };
         };
       in {
-        packages.default = nvim;
+        packages = {
+          default = nvim;
+          vjvim = pkgs.writeShellScriptBin "vjvim" ''exec ${nvim}/bin/nvim "$@"'';
+        };
 
         formatter = pkgs.alejandra;
 
@@ -76,7 +79,7 @@
           default = with pkgs;
             mkShell {
               inherit (self'.checks.pre-commit-check) shellHook;
-              buildInputs = self'.checks.pre-commit-check.enabledPackages;
+              buildInputs = [self'.packages.vjvim] ++ self'.checks.pre-commit-check.enabledPackages;
             };
         };
 
