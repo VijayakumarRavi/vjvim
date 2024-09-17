@@ -1,13 +1,31 @@
-{
+{pkgs, ...}: {
   plugins = {
     telescope = {
       enable = true;
       extensions = {
-        file-browser = {
+        frecency = {
           enable = true;
+          settings.show_scores = true;
         };
         fzf-native = {
           enable = true;
+        };
+        undo = {
+          enable = true;
+          settings = {
+            side_by_side = true;
+            time_format = "!%Y-%m-%dT%TZ";
+            use_custom_command = [
+              "bash"
+              "-c"
+              "echo '$DIFF' | delta"
+            ];
+            entry_format = "state #$ID";
+            use_delta = true;
+            vim_diff_opts = {
+              ctxlen = 8;
+            };
+          };
         };
       };
       settings = {
@@ -22,15 +40,21 @@
       };
       keymaps = {
         "<leader><space>" = {
-          action = "find_files";
+          action = "frecency workspace=CWD prompt_prefix=🔍";
           options = {
-            desc = "Find project files";
+            desc = "Find files";
           };
         };
         "<leader>/" = {
           action = "live_grep";
           options = {
             desc = "Grep (root dir)";
+          };
+        };
+        "<leader>u" = {
+          action = "undo";
+          options = {
+            desc = "undo tree";
           };
         };
         "<leader>:" = {
@@ -45,37 +69,13 @@
             desc = "+buffer";
           };
         };
-        "<C-p>" = {
-          action = "find_files";
+        "<leader>ff" = {
+          action = "oldfiles";
           options = {
-            desc = "Find project files";
-          };
-        };
-        "<leader>fr" = {
-          action = "live_grep";
-          options = {
-            desc = "Find text";
-          };
-        };
-        "<leader>fR" = {
-          action = "resume";
-          options = {
-            desc = "Resume";
+            desc = "Recent files";
           };
         };
         "<leader>fg" = {
-          action = "oldfiles";
-          options = {
-            desc = "Recent";
-          };
-        };
-        "<leader>fb" = {
-          action = "buffers";
-          options = {
-            desc = "Buffers";
-          };
-        };
-        "<leader>ff" = {
           action = "git_files";
           options = {
             desc = "Search git files";
@@ -87,37 +87,7 @@
             desc = "Commits";
           };
         };
-        "<leader>gs" = {
-          action = "git_status";
-          options = {
-            desc = "Status";
-          };
-        };
-        "<leader>sa" = {
-          action = "autocommands";
-          options = {
-            desc = "Auto Commands";
-          };
-        };
-        "<leader>sb" = {
-          action = "current_buffer_fuzzy_find";
-          options = {
-            desc = "Buffer";
-          };
-        };
-        "<leader>sc" = {
-          action = "command_history";
-          options = {
-            desc = "Command History";
-          };
-        };
-        "<leader>sC" = {
-          action = "commands";
-          options = {
-            desc = "Commands";
-          };
-        };
-        "<leader>sD" = {
+        "<leader>sd" = {
           action = "diagnostics";
           options = {
             desc = "Workspace diagnostics";
@@ -129,46 +99,16 @@
             desc = "Help pages";
           };
         };
-        "<leader>sH" = {
-          action = "highlights";
-          options = {
-            desc = "Search Highlight Groups";
-          };
-        };
-        "<leader>sk" = {
+        "<leader>k" = {
           action = "keymaps";
           options = {
             desc = "Keymaps";
           };
         };
-        "<leader>sM" = {
-          action = "man_pages";
+        "<C-p>" = {
+          action = "projects";
           options = {
-            desc = "Man pages";
-          };
-        };
-        "<leader>sm" = {
-          action = "marks";
-          options = {
-            desc = "Jump to Mark";
-          };
-        };
-        "<leader>so" = {
-          action = "vim_options";
-          options = {
-            desc = "Options";
-          };
-        };
-        "<leader>sR" = {
-          action = "resume";
-          options = {
-            desc = "Resume";
-          };
-        };
-        "<leader>uC" = {
-          action = "colorscheme";
-          options = {
-            desc = "Colorscheme preview";
+            desc = "Find project files";
           };
         };
       };
@@ -180,40 +120,5 @@
     };
   };
 
-  keymaps = [
-    {
-      mode = "n";
-      key = "<leader>sd";
-      action = "<cmd>Telescope diagnostics bufnr=0<cr>";
-      options = {
-        desc = "Document diagnostics";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>fe";
-      action = "<cmd>Telescope file_browser<cr>";
-      options = {
-        desc = "File browser";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>fE";
-      action = "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>";
-      options = {
-        desc = "File browser";
-      };
-    }
-  ];
-  extraConfigLua = ''
-    require("telescope").setup{
-      pickers = {
-        colorscheme = {
-          enable_preview = true
-        }
-      }
-    }
-    require('telescope').load_extension('projects')
-  '';
+  extraPackages = [pkgs.ripgrep];
 }

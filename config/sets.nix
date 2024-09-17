@@ -65,10 +65,11 @@
 
       # Disable mode indicator
       showmode = false;
-
-      # Clipboard provider
-      clipboard.register = "unnamedplus";
     };
+
+    # Clipboard provider
+    clipboard.register = "unnamedplus";
+
     extraConfigVim = ''
         if has("persistent_undo")
         let target_path = expand('~/.cache/undodir')

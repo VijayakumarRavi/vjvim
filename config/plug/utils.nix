@@ -31,14 +31,6 @@
       ];
     };
 
-    undotree = {
-      enable = true;
-      settings = {
-        autoOpenDiff = true;
-        focusOnToggle = true;
-      };
-    };
-
     harpoon = {
       enable = true;
       enableTelescope = true;
@@ -99,17 +91,4 @@
         end, { desc = "[visual-surround] Surround selection with " .. key })
     end
   '';
-
-  keymaps = [
-    {
-      ## undo tree
-      mode = "n";
-      key = "<leader>ut";
-      action = "<cmd>UndotreeToggle<CR>";
-      options = {
-        silent = true;
-        desc = "Undotree";
-      };
-    }
-  ];
 }
