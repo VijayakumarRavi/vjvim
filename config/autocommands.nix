@@ -5,12 +5,20 @@
       event = "InsertEnter";
       command = "norm zz";
     }
-
     # Open help in a vertical split
     {
       event = "FileType";
       pattern = "help";
       command = "wincmd L";
+    }
+    {
+      event = "VimEnter";
+      command = ":lua if vim.fn.argc() == 0 then require('telescope').extensions['frecency'].frecency({prompt_prefix='🔍 '}) end";
+    }
+    {
+      event = "BufReadPost";
+      pattern = "*";
+      command = "lua RestoreCursorPosition()";
     }
   ];
 
@@ -32,10 +40,6 @@
       then
         vim.cmd('normal! g`"')
       end
-    end
-
-    if vim.fn.has("autocmd") then
-      vim.cmd([[autocmd BufReadPost * lua RestoreCursorPosition()]])
     end
   '';
 }

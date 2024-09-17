@@ -5,7 +5,7 @@
     ./sets.nix
 
     # Plugins
-    ./plug/alpha.nix
+    # ./plug/alpha.nix
     ./plug/colorscheme.nix
     ./plug/completion.nix
     ./plug/conform.nix
