@@ -1,8 +1,5 @@
 {
   plugins = {
-    cmp-emoji = {
-      enable = true;
-    };
     cmp = {
       enable = true;
       settings = {
@@ -27,6 +24,7 @@
         };
         sources = [
           {name = "nvim_lsp";}
+          #{name = "supermaven";}
           {name = "emoji";}
           {
             name = "buffer"; # text within current buffer
@@ -42,7 +40,6 @@
             keywordLength = 3;
           }
         ];
-
         window = {
           completion = {
             border = "solid";
@@ -51,7 +48,6 @@
             border = "solid";
           };
         };
-
         mapping = {
           "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
           "<C-j>" = "cmp.mapping.select_next_item()";
@@ -80,10 +76,14 @@
     cmp-cmdline = {
       enable = false;
     }; # autocomplete for cmdline
+    cmp-emoji = {
+      enable = true;
+    }; # emoji
     lspkind = {
       enable = true;
       symbolMap = {
         Copilot = "";
+        Supermaven = "";
       };
       extraOptions = {
         maxwidth = 50;

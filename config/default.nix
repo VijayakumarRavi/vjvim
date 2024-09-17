@@ -18,5 +18,6 @@
     ./plug/treesitter.nix
     ./plug/utils.nix
     ./plug/zen-mode.nix
+    ./plug/supermaven.nix
   ];
 }
