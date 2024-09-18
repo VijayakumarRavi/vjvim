@@ -36,17 +36,18 @@
             };
           };
           sorting_strategy = "ascending";
+          prompt_prefix = "  ";
         };
       };
       keymaps = {
         "<leader><space>" = {
-          action = "frecency workspace=CWD prompt_prefix=🔍";
+          action = "frecency workspace=CWD";
           options = {
             desc = "Find files";
           };
         };
         "<leader>/" = {
-          action = "live_grep";
+          action = "live_grep prompt_prefix=🔍 ";
           options = {
             desc = "Grep (root dir)";
           };

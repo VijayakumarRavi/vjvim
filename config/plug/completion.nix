@@ -24,7 +24,7 @@
         };
         sources = [
           {name = "nvim_lsp";}
-          #{name = "supermaven";}
+          {name = "supermaven";}
           {name = "emoji";}
           {
             name = "buffer"; # text within current buffer
@@ -83,7 +83,7 @@
       enable = true;
       symbolMap = {
         Copilot = "";
-        Supermaven = "";
+        Supermaven = "";
       };
       extraOptions = {
         maxwidth = 50;

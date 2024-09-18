@@ -4,19 +4,21 @@
   ];
   extraConfigLua = ''
     require("supermaven-nvim").setup({
-      keymaps = {
-        accept_suggestion = "<CR>", -- accept the current suggestion
-        next_suggestion = "<C-j>", -- move to the next suggestion
-        previous_suggestion = "<C-k>", -- move to the previous suggestion
-        clear_suggestion = "<Del>", -- clear the current suggestion
-      },
-      color = {
-        suggestion_color = "#ffffff",
-        cterm = 244,
-      },
-      condition = function()
-        return false
-      end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
+      disable_keymaps = true,
+      disable_inline_completion = true
+      -- keymaps = {
+      --   accept_suggestion = "<Tab>", -- accept the current suggestion
+      --   next_suggestion = "<C-j>", -- move to the next suggestion
+      --   previous_suggestion = "<C-k>", -- move to the previous suggestion
+      --   clear_suggestion = "<Bs>", -- clear the current suggestion
+      -- },
+      -- color = {
+      --   suggestion_color = "#ffffff",
+      --   cterm = 244,
+      -- },
+      -- condition = function()
+      --   return false
+      -- end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
     });
   '';
   keymaps = [
