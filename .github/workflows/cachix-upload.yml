@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: [aarch64-darwin, x86_64-darwin, aarch64-linux, x86_64-linux]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
