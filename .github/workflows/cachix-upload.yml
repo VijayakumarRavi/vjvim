@@ -57,7 +57,7 @@ jobs:
         run: nix flake update
       - name: Run and test the config
         run: |
-          echo "Running on ${{ matrix.machine.machine.os }} - ${{ matrix.machine.arch }}"
+          echo "Running on ${{ matrix.machine.os }} - ${{ matrix.machine.arch }}"
           nix run . -- -v
       - name: Commit and Push updated flake.lock
         if: matrix.machine.os == 'ubuntu-latest'
