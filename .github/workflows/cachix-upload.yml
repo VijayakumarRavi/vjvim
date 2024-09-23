@@ -17,10 +17,8 @@ jobs:
       fail-fast: false
       matrix:
         machine:
-          - os: macos-latest
-            arch: [aarch64-darwin, x86_64-darwin]
-          - os: ubuntu-latest
-            arch: [x86_64-linux, aarch64-linux]
+          - os: [macos-latest, ubuntu-latest]
+            arch: [aarch64-darwin, x86_64-darwin, x86_64-linux, aarch64-linux]
     runs-on: ${{ matrix.machine.os }}
     steps:
       - name: Checkout repository
@@ -39,7 +37,8 @@ jobs:
             extra-platforms = aarch64-linux x86_64-linux aarch64-darwin x86_64-darwin
             substituters = https://nix-community.cachix.org?priority=41 https://numtide.cachix.org?priority=42 https://cache.nixos.org/
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
-      - name: Setup QEMU for other architectures builds
+      - name: Setup QEMU for arm architectures builds
+        if: matrix.machine.arch == 'aarch64-linux'
         uses: docker/setup-qemu-action@v3
       - name: Enable Github Cache for Nix store
         uses: DeterminateSystems/magic-nix-cache-action@v8
@@ -51,7 +50,9 @@ jobs:
       - name: Update flake.lock
         run: nix flake update
       - name: Run and test the config
-        run: nix run . -- -v
+        run: |
+          echo "Running on ${{ matrix.machine.os }} - ${{ matrix.machine.arch }}"
+          nix run . -- -v
       - name: Commit and Push updated flake.lock
         if: matrix.machine.os == 'ubuntu-latest'
         uses: stefanzweifel/git-auto-commit-action@v5
