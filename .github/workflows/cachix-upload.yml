@@ -52,7 +52,7 @@ jobs:
       - name: Update flake.lock
         run: nix flake update
       - name: Run and test the config
-        run: nix run .#packages.${{ matrix.machine.arch }}.vjvim -- -v
+        run: nix run .#packages.${{ matrix.machine.arch }}.default -- -v
       - name: Commit and Push updated flake.lock
         if: matrix.machine.os == 'ubuntu-latest'
         uses: stefanzweifel/git-auto-commit-action@v5
