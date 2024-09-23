@@ -1,5 +1,8 @@
 {pkgs, ...}: {
   plugins = {
+    # evaluation warning: Nixvim: `plugins.web-devicons` was enabled automatically because the following plugins are enabled.
+    # This behaviour is deprecated. so enabled it manually.
+    web-devicons.enable = true;
     telescope = {
       enable = true;
       extensions = {
