@@ -14,16 +14,10 @@ jobs:
   build-and-test:
     name: Build and Test
     strategy:
+      fail-fast: false
       matrix:
-        machine:
-          - os: macos-latest
-            arch: aarch64-darwin
-          - os: macos-latest
-            arch: x86_64-darwin
-          - os: ubuntu-latest
-            arch: aarch64-linux
-          - os: ubuntu-latest
-            arch: x86_64-linux
+        os: [macos-latest, ubuntu-latest]
+        arch: [aarch64-darwin, x86_64-darwin, aarch64-linux, x86_64-linux]
     runs-on: ${{ matrix.machine.os }}
     steps:
       - name: Checkout repository
