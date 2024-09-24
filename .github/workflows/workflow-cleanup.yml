@@ -10,9 +10,10 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: clean workflow runs
-        uses: boredland/action-purge-workflow-runs@main
+      - name: Cleanup workflow runs
+        uses: iamludal/action-purge-workflow-runs@v2
         with:
           days-old: 14
+          ignore-open-pull-requests: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
