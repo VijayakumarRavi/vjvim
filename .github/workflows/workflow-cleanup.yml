@@ -3,6 +3,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 18 * * 0'
+# Workflow permissions
+permissions:
+  contents: write
+  id-token: write
 jobs:
   cleanup:
     runs-on: ubuntu-latest
