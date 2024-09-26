@@ -1,6 +1,7 @@
 # yamllint disable rule:line-length rule:document-start rule:truthy
 name: 'Build, test, and cache'
 on:
+  workflow_dispatch: null
   pull_request:
   push:
     paths:
