@@ -64,7 +64,7 @@ jobs:
           echo "Running on ${{ matrix.machine.os }} - ${{ matrix.machine.arch }}"
           nix run . -- -v
       - name: Commit and Push updated flake.lock
-        if: matrix.machine.os == 'ubuntu-latest'
+        if: matrix.machine.arch == 'x86_64-linux'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Bot 🤖(flake): bump flake.lock'
