@@ -7,17 +7,31 @@
     lsp = {
       enable = true;
       servers = {
-        lua-ls = {
+        lua_ls = {
           enable = true;
           settings.diagnostics.globals = ["vim"];
         };
-        nil-ls.enable = true;
+        gopls = {
+          enable = true;
+          filetypes = ["go" "gomod" "gosum" "gotmpl" "gowork"];
+          settings = {
+            completeUnimported = true;
+            usePlaceholders = true;
+            staticcheck = true;
+            analyses = {
+              unusedvariable = true;
+              unusedparams = true;
+              unreachable = true;
+            };
+          };
+        };
+        nil_ls.enable = true;
         yamlls.enable = true;
         jsonls.enable = true;
         ansiblels.enable = true;
-        typos-lsp.enable = true;
+        typos_lsp.enable = true;
         dockerls.enable = true;
-        docker-compose-language-service.enable = true;
+        docker_compose_language_service.enable = true;
       };
       keymaps = {
         silent = true;

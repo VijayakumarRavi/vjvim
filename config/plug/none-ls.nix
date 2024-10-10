@@ -15,6 +15,7 @@
         yamllint.enable = true;
         codespell.enable = true;
         actionlint.enable = true;
+        golangci_lint.enable = true;
       };
       formatting = {
         alejandra.enable = true;
@@ -27,6 +28,9 @@
             }
           '';
         };
+        gofumpt.enable = true;
+        golines.enable = true;
+        goimports_reviser.enable = true;
         just.enable = true;
         stylua.enable = true;
         yamlfmt.enable = true;

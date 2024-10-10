@@ -51,6 +51,19 @@
         };
       };
     };
+
+    toggleterm = {
+      enable = true;
+      settings = {
+        direction = "float";
+        float_opts = {
+          border = "curved";
+          height = 30;
+          width = 130;
+        };
+        open_mapping = "[[<leader>t]]";
+      };
+    };
   };
 
   extraPlugins = [
@@ -63,6 +76,10 @@
     (pkgs.vimUtils.buildVimPlugin {
       name = "visual-surround-nvim";
       src = inputs.Plugin-visual-surround-nvim;
+    })
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "snipe-nvim";
+      src = inputs.Plugin-snipe-nvim;
     })
   ];
 
@@ -90,5 +107,29 @@
             surround(key)
         end, { desc = "[visual-surround] Surround selection with " .. key })
     end
+
+    -- Configuration for Snipe.nvim
+    local snipe = require("snipe")
+    snipe.setup({
+      ui = {
+        max_width = -1, -- -1 means dynamic width
+        position = "topright",
+      },
+      hints = {
+        dictionary = "asdfghjklzxcvbnm",
+      },
+    })
   '';
+
+  keymaps = [
+    {
+      mode = "n";
+      key = "pp";
+      action = ":lua require('snipe').open_buffer_menu()<CR>";
+      options = {
+        desc = "Toggle ZenMode";
+        silent = true;
+      };
+    }
+  ];
 }

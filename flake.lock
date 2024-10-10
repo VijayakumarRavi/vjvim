@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "Plugin-snipe-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724418876,
+        "narHash": "sha256-G4g/OzyXhDhX84HkxlhFSy6E+EAGxH+HL1Bw5s5FWHE=",
+        "owner": "leath-dub",
+        "repo": "snipe.nvim",
+        "rev": "f1abd4aaaef6398b45dcddc9f1a40dd982f732b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leath-dub",
+        "repo": "snipe.nvim",
+        "type": "github"
+      }
+    },
     "Plugin-visual-surround-nvim": {
       "flake": false,
       "locked": {
@@ -375,6 +391,7 @@
     "root": {
       "inputs": {
         "Plugin-hlchunk-nvim": "Plugin-hlchunk-nvim",
+        "Plugin-snipe-nvim": "Plugin-snipe-nvim",
         "Plugin-visual-surround-nvim": "Plugin-visual-surround-nvim",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",

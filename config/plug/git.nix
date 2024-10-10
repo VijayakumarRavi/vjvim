@@ -57,7 +57,7 @@
     {
       mode = ["n" "v"];
       key = "<leader>gh";
-      action = "gitsigns";
+      action = ":Gitsigns toggle_current_line_blame<CR>";
       options = {
         silent = true;
         desc = "+hunks";

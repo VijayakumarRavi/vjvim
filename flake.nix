@@ -32,6 +32,11 @@
       flake = false;
     };
 
+    Plugin-snipe-nvim = {
+      url = "github:leath-dub/snipe.nvim";
+      flake = false;
+    };
+
     Plugin-visual-surround-nvim = {
       url = "github:NStefan002/visual-surround.nvim";
       flake = false;
