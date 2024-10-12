@@ -6,6 +6,10 @@
   plugins = {
     leap.enable = true;
 
+    wakatime.enable = true;
+
+    which-key.enable = true;
+
     nvim-autopairs = {
       enable = true;
       settings = {
