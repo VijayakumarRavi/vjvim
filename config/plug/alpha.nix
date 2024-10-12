@@ -42,27 +42,32 @@
           mkButton = shortcut: cmd: val: hl: {
             type = "button";
             inherit val;
+            on_press.__raw = "function() vim.cmd[[${cmd}]] end";
             opts = {
               inherit hl shortcut;
               keymap = [
                 "n"
                 shortcut
-                cmd
+                "<CMD>${cmd}<CR>"
                 {}
               ];
               position = "center";
-              cursor = 0;
+              cursor = 40;
               width = 40;
               align_shortcut = "right";
               hl_shortcut = "Keyword";
             };
           };
         in [
-          (mkButton "f" "<CMD>lua require('telescope.builtin').find_files()<CR>" "Browse File" "Operator")
+          (mkButton "n" "ene" "  New file" "Operator")
 
-          (mkButton "p" "<CMD>lua require('telescope').extensions.projects.projects{}<CR>" "Projects" "Operator")
+          (mkButton "f" "lua if vim.fn.argc() == 0 then require('telescope').extensions['frecency'].frecency({prompt_prefix='  '}) end" "  Browse File" "Operator")
 
-          (mkButton "q" "<CMD>qa<CR>" "Quit" "String")
+          (mkButton "p" "lua require('telescope').extensions.projects.projects{}" "  Projects" "Operator")
+
+          (mkButton "g" "LazyGit" "  Open LazyGit" "Constant")
+
+          (mkButton "q" "qa" "  Quit Neovim" "String")
         ];
       }
       {
