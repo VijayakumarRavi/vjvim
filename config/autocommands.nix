@@ -12,10 +12,6 @@
       command = "wincmd L";
     }
     {
-      event = "VimEnter";
-      command = ":lua if vim.fn.argc() == 0 then require('telescope').extensions['frecency'].frecency({prompt_prefix='🔍 '}) end";
-    }
-    {
       event = "BufReadPost";
       pattern = "*";
       command = "lua RestoreCursorPosition()";
