@@ -10,16 +10,15 @@
 
     which-key.enable = true;
 
+    comment.enable = true; # commenting plugin for neovim
+
+    nvim-ufo.enable = true; # for better folding
+
     nvim-autopairs = {
       enable = true;
       settings = {
         event = "InsertEnter";
       };
-    };
-
-    ## commenting plugin for neovim
-    comment = {
-      enable = true;
     };
 
     ## automatically highlighting other uses of the word under the cursor
@@ -128,10 +127,10 @@
   keymaps = [
     {
       mode = "n";
-      key = "pp";
+      key = "<leader>p";
       action = ":lua require('snipe').open_buffer_menu()<CR>";
       options = {
-        desc = "Toggle ZenMode";
+        desc = "Toggle Snipe";
         silent = true;
       };
     }

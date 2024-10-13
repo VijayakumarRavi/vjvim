@@ -3,6 +3,7 @@
     opts = {
       # Enable line numbers
       number = true;
+      relativenumber = true;
 
       # Set tabs to 2 spaces
       tabstop = 2;
@@ -65,6 +66,14 @@
 
       # Disable mode indicator
       showmode = false;
+
+      # Set fold settings
+      # These options were recommended by nvim-ufo
+      # See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+      foldcolumn = "0";
+      foldlevel = 99;
+      foldlevelstart = 99;
+      foldenable = true;
     };
 
     # Clipboard provider
