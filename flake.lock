@@ -19,11 +19,11 @@
     "Plugin-snipe-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1729004872,
-        "narHash": "sha256-MOuRurecAj6PRC9G6JdEmJ53E/+4lhuSD5JUe0SP6GI=",
+        "lastModified": 1729430130,
+        "narHash": "sha256-iRAX0xestLjPPP8IMimGJJfNqgQINb5lp6eoi6J+BSQ=",
         "owner": "leath-dub",
         "repo": "snipe.nvim",
-        "rev": "e2d43b9290480d745910b5a872a504651da29bd3",
+        "rev": "4e162869cf0a777180c38afdf18f6364dadf877c",
         "type": "github"
       },
       "original": {
@@ -330,11 +330,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1729332380,
-        "narHash": "sha256-ePzkpRV4zYR9cO1o5HrYuZRmoEthsPgNP0cvRGlHSro=",
+        "lastModified": 1729438888,
+        "narHash": "sha256-TGTDOX2/5OIoSzlcRReVn4BbbfL6Ami/eassiPPGqNA=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "e3239b4d328efaaf090892fbca71a1008dbc5a59",
+        "rev": "47b563d4e1410bff6a9481b3dd8b01b1e5ed70d2",
         "type": "github"
       },
       "original": {
