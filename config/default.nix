@@ -30,6 +30,7 @@ in {
       type = lib.types.enum [
         "paradise"
         "decay"
+        "blueberry"
         "edge-dark"
         "mountain"
         "tokyonight"
@@ -44,7 +45,7 @@ in {
 
   # Configuration
   config = {
-    theme = "paradise";
+    theme = "blueberry";
     extraConfigLua = ''
       _G.theme = "${config.theme}"
     '';
