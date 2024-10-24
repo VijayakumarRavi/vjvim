@@ -12,10 +12,29 @@
       };
       diagnostics = {
         statix.enable = true;
-        yamllint.enable = true;
         codespell.enable = true;
         actionlint.enable = true;
         golangci_lint.enable = true;
+        yamllint = {
+          enable = true;
+          settings = {
+            extra_args = [
+              "-d"
+              ''
+                {
+                extends: default,
+                rules: {
+                  line-length: {max: 160},
+                  document-start: disable,
+                  comments: {
+                    min-spaces-from-content: 1,
+                  },
+                }
+                }
+              ''
+            ];
+          };
+        };
       };
       formatting = {
         alejandra.enable = true;

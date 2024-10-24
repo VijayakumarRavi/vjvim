@@ -25,7 +25,19 @@
             };
           };
         };
-        nil_ls.enable = true;
+        nixd = {
+          enable = true;
+          settings = {
+            formatting.command = ["alejandra"];
+            nixpkgs.expr = "import <nixpkgs> {}";
+            options = {
+              zoro.expr = ''(builtins.getFlake "github:VijayakumarRavi/nix-config").nixosConfigurations.zoro.options'';
+              usopp.expr = ''(builtins.getFlake "github:VijayakumarRavi/nix-config").nixosConfigurations.usopp.options'';
+              nami.expr = ''(builtins.getFlake "github:VijayakumarRavi/nix-config").nixosConfigurations.nami.options'';
+              kakashi.expr = ''(builtins.getFlake "github:VijayakumarRavi/nix-config").darwinConfigurations.kakashi.options'';
+            };
+          };
+        };
         yamlls.enable = true;
         jsonls.enable = true;
         ansiblels.enable = true;

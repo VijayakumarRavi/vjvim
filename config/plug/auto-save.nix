@@ -10,17 +10,11 @@
       };
       condition = ''
           function(buf)
-          -- Disable auto-save for the harpoon plugin, otherwise it just opens and closes
-          -- https://github.com/ThePrimeagen/harpoon/issues/434
-          if vim.bo[buf].filetype == "harpoon" then
+          if vim.bo[buf].filetype == "harpoon" or vim.bo[buf].filetype == "oil" then
             return false
           end
           local fn = vim.fn
           local utils = require("auto-save.utils.data")
-          -- don't save for `sql` file types
-          -- I do this so when working with dadbod the file is not saved every time
-          -- I make a change, and a SQL query executed
-          -- Run `:set filetype?` on a dadbod query to make sure of the filetype
           if utils.not_in(fn.getbufvar(buf, "&filetype"), { "mysql" }) then
             return true
           end
@@ -36,7 +30,7 @@
       noautocmd = false;
       lockmarks = false; ## lock marks when saving, see `:h lockmarks` for more details
       ## delay after which a pending save is executed (default 1000)
-      debounce_delay = 750;
+      debounce_delay = 1000;
       ## log debug messages to 'auto-save.log' file in neovim cache directory, set to `true` to enable
       debug = false;
     };
