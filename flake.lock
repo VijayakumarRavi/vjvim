@@ -3,11 +3,11 @@
     "Plugin-hlchunk-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1727833913,
-        "narHash": "sha256-Rx5kpjfpiH9i/IvOXx+wEWSO4gdfmXdhULDxbcBJQAY=",
+        "lastModified": 1732349755,
+        "narHash": "sha256-f5VVfpfVZk6ULBWVSVEzXBN9F4ROTzhomV1F2mKIem4=",
         "owner": "shellRaining",
         "repo": "hlchunk.nvim",
-        "rev": "ba6e2347177fec8ec6af4ae26d11a468c9e0ca72",
+        "rev": "5465dd33ade8676d63f6e8493252283060cd72ca",
         "type": "github"
       },
       "original": {
@@ -358,11 +358,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1732143099,
-        "narHash": "sha256-lh2Qi8gd1SwJVGo7gJjoFvS/djS5Nimaw25j792PJjM=",
+        "lastModified": 1732315025,
+        "narHash": "sha256-vPAMWd5/akE3U3B8uXzi05X/9fUd71sZaOnfBrX4AR0=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "2f71c4250bef7a52fe21bd00d1e58c119f62008c",
+        "rev": "c1271fa10a54a3b35db6040dd6e779f349af52bf",
         "type": "github"
       },
       "original": {
