@@ -84,6 +84,10 @@
       name = "snipe-nvim";
       src = inputs.Plugin-snipe-nvim;
     })
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "suda-vim";
+      src = inputs.Plugin-suda-vim;
+    })
   ];
 
   extraConfigLua = ''

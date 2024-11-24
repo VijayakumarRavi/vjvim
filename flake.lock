@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "Plugin-suda-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714052487,
+        "narHash": "sha256-cT1ihAeVCywYrJV96zp9ku/ksvn4LP4bKdR6s6FZkIk=",
+        "owner": "lambdalisue",
+        "repo": "vim-suda",
+        "rev": "b97fab52f9cdeabe2bbb5eb98d82356899f30829",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "repo": "vim-suda",
+        "type": "github"
+      }
+    },
     "Plugin-visual-surround-nvim": {
       "flake": false,
       "locked": {
@@ -421,6 +437,7 @@
       "inputs": {
         "Plugin-hlchunk-nvim": "Plugin-hlchunk-nvim",
         "Plugin-snipe-nvim": "Plugin-snipe-nvim",
+        "Plugin-suda-vim": "Plugin-suda-vim",
         "Plugin-visual-surround-nvim": "Plugin-visual-surround-nvim",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",

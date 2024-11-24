@@ -37,6 +37,11 @@
       flake = false;
     };
 
+    Plugin-suda-vim = {
+      url = "github:lambdalisue/vim-suda";
+      flake = false;
+    };
+
     Plugin-visual-surround-nvim = {
       url = "github:NStefan002/visual-surround.nvim";
       flake = false;

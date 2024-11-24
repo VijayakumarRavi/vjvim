@@ -11,10 +11,32 @@
       pattern = "help";
       command = "wincmd L";
     }
+    # Restore cursor position on opening a file
     {
       event = "BufReadPost";
       pattern = "*";
       command = "lua RestoreCursorPosition()";
+    }
+    # Automatically create missing directories before saving
+    {
+      event = "BufWritePre";
+      pattern = "*";
+      command = ''
+        lua << EOF
+        -- Disable this autocmd for specific plugins
+        local excluded_plugins = { "oil", "neo-tree", "lazy" }
+        local filetype = vim.bo.filetype
+        for _, plugin in ipairs(excluded_plugins) do
+          if filetype == plugin then
+            return
+          end
+        end
+        local dir = vim.fn.fnamemodify(vim.fn.expand("<afile>"), ":p:h")
+        if not vim.loop.fs_stat(dir) then
+          vim.fn.mkdir(dir, "p")
+        end
+        EOF
+      '';
     }
   ];
 

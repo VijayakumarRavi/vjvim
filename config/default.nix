@@ -45,7 +45,7 @@ in {
 
   # Configuration
   config = {
-    theme = "blueberry";
+    theme = "gruvbox";
     extraConfigLua = ''
       _G.theme = "${config.theme}"
     '';
