@@ -5,6 +5,8 @@
 }: let
   colors = import ../colors/${config.theme}.nix {};
 in {
+  plugins.transparent.enable = true;
+
   colorschemes = {
     base16 = {
       enable = true;
