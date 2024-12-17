@@ -55,6 +55,17 @@
       };
     }
     {
+      mode = "n";
+      key = "<leader>gw";
+      action = ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>";
+    }
+    {
+      mode = "n";
+      key = "<leader>gwc";
+      action = ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>";
+    }
+
+    {
       mode = ["n" "v"];
       key = "<leader>gh";
       action = ":Gitsigns toggle_current_line_blame<CR>";

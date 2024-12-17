@@ -52,7 +52,7 @@
         goimports_reviser.enable = true;
         just.enable = true;
         stylua.enable = true;
-        yamlfmt.enable = true;
+        yamlfix.enable = true;
       };
     };
   };
