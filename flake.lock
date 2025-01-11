@@ -1,69 +1,5 @@
 {
   "nodes": {
-    "Plugin-hlchunk-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1732349755,
-        "narHash": "sha256-f5VVfpfVZk6ULBWVSVEzXBN9F4ROTzhomV1F2mKIem4=",
-        "owner": "shellRaining",
-        "repo": "hlchunk.nvim",
-        "rev": "5465dd33ade8676d63f6e8493252283060cd72ca",
-        "type": "github"
-      },
-      "original": {
-        "owner": "shellRaining",
-        "repo": "hlchunk.nvim",
-        "type": "github"
-      }
-    },
-    "Plugin-snipe-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736108869,
-        "narHash": "sha256-sJ71eiE0XmMJkhNCkbY82R4eHzBOOKFrPa+nxLc1f8s=",
-        "owner": "leath-dub",
-        "repo": "snipe.nvim",
-        "rev": "0d0a482ac713370196e4fc0025d5aaac5030104d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "leath-dub",
-        "repo": "snipe.nvim",
-        "type": "github"
-      }
-    },
-    "Plugin-suda-vim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1733630017,
-        "narHash": "sha256-46sy3rAdOCULVt1RkIoGdweoV3MqQaB33Et9MrxI6Lk=",
-        "owner": "lambdalisue",
-        "repo": "vim-suda",
-        "rev": "9adda7d195222d4e2854efb2a88005a120296c47",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lambdalisue",
-        "repo": "vim-suda",
-        "type": "github"
-      }
-    },
-    "Plugin-visual-surround-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736118044,
-        "narHash": "sha256-0Df2aRxobdRtgywqhBGdgbtEiDxfTPFqhau8DvXNNw8=",
-        "owner": "NStefan002",
-        "repo": "visual-surround.nvim",
-        "rev": "9d8a3612d5a2bbe3d7096e246ce06fa9573a6806",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NStefan002",
-        "repo": "visual-surround.nvim",
-        "type": "github"
-      }
-    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -390,6 +326,86 @@
         "type": "github"
       }
     },
+    "plugin-copilot-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728401940,
+        "narHash": "sha256-9264TNocFvtC2znvgfjpwLWBTGfg1U5Fr0dZkkyCYpQ=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "87038123804796ca7af20d1b71c3428d858a9124",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "copilot.vim",
+        "type": "github"
+      }
+    },
+    "plugin-hlchunk-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1732349755,
+        "narHash": "sha256-f5VVfpfVZk6ULBWVSVEzXBN9F4ROTzhomV1F2mKIem4=",
+        "owner": "shellRaining",
+        "repo": "hlchunk.nvim",
+        "rev": "5465dd33ade8676d63f6e8493252283060cd72ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shellRaining",
+        "repo": "hlchunk.nvim",
+        "type": "github"
+      }
+    },
+    "plugin-snipe-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736108869,
+        "narHash": "sha256-sJ71eiE0XmMJkhNCkbY82R4eHzBOOKFrPa+nxLc1f8s=",
+        "owner": "leath-dub",
+        "repo": "snipe.nvim",
+        "rev": "0d0a482ac713370196e4fc0025d5aaac5030104d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leath-dub",
+        "repo": "snipe.nvim",
+        "type": "github"
+      }
+    },
+    "plugin-suda-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733630017,
+        "narHash": "sha256-46sy3rAdOCULVt1RkIoGdweoV3MqQaB33Et9MrxI6Lk=",
+        "owner": "lambdalisue",
+        "repo": "vim-suda",
+        "rev": "9adda7d195222d4e2854efb2a88005a120296c47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lambdalisue",
+        "repo": "vim-suda",
+        "type": "github"
+      }
+    },
+    "plugin-visual-surround-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736118044,
+        "narHash": "sha256-0Df2aRxobdRtgywqhBGdgbtEiDxfTPFqhau8DvXNNw8=",
+        "owner": "NStefan002",
+        "repo": "visual-surround.nvim",
+        "rev": "9d8a3612d5a2bbe3d7096e246ce06fa9573a6806",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NStefan002",
+        "repo": "visual-surround.nvim",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -414,13 +430,14 @@
     },
     "root": {
       "inputs": {
-        "Plugin-hlchunk-nvim": "Plugin-hlchunk-nvim",
-        "Plugin-snipe-nvim": "Plugin-snipe-nvim",
-        "Plugin-suda-vim": "Plugin-suda-vim",
-        "Plugin-visual-surround-nvim": "Plugin-visual-surround-nvim",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "plugin-copilot-vim": "plugin-copilot-vim",
+        "plugin-hlchunk-nvim": "plugin-hlchunk-nvim",
+        "plugin-snipe-nvim": "plugin-snipe-nvim",
+        "plugin-suda-vim": "plugin-suda-vim",
+        "plugin-visual-surround-nvim": "plugin-visual-surround-nvim",
         "pre-commit-hooks": "pre-commit-hooks"
       }
     },

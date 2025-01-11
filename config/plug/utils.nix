@@ -73,20 +73,24 @@
     ## highlight the indent line
     (pkgs.vimUtils.buildVimPlugin {
       name = "hlchunk";
-      src = inputs.Plugin-hlchunk-nvim;
+      src = inputs.plugin-hlchunk-nvim;
     })
     ## surround plugin
     (pkgs.vimUtils.buildVimPlugin {
       name = "visual-surround-nvim";
-      src = inputs.Plugin-visual-surround-nvim;
+      src = inputs.plugin-visual-surround-nvim;
     })
     (pkgs.vimUtils.buildVimPlugin {
       name = "snipe-nvim";
-      src = inputs.Plugin-snipe-nvim;
+      src = inputs.plugin-snipe-nvim;
     })
     (pkgs.vimUtils.buildVimPlugin {
       name = "suda-vim";
-      src = inputs.Plugin-suda-vim;
+      src = inputs.plugin-suda-vim;
+    })
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "copilot-vim";
+      src = inputs.plugin-copilot-vim;
     })
   ];
 

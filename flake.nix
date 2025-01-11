@@ -27,22 +27,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    Plugin-hlchunk-nvim = {
+    plugin-hlchunk-nvim = {
       url = "github:shellRaining/hlchunk.nvim";
       flake = false;
     };
 
-    Plugin-snipe-nvim = {
+    plugin-snipe-nvim = {
       url = "github:leath-dub/snipe.nvim";
       flake = false;
     };
 
-    Plugin-suda-vim = {
+    plugin-suda-vim = {
       url = "github:lambdalisue/vim-suda";
       flake = false;
     };
 
-    Plugin-visual-surround-nvim = {
+    plugin-copilot-vim = {
+      url = "github:github/copilot.vim";
+      flake = false;
+    };
+
+    plugin-visual-surround-nvim = {
       url = "github:NStefan002/visual-surround.nvim";
       flake = false;
     };
