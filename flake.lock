@@ -23,12 +23,12 @@
     },
     "flake-compat": {
       "locked": {
-        "lastModified": 1696426674,
-        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
-        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
-        "revCount": 57,
+        "lastModified": 1733328505,
+        "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
+        "rev": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
+        "revCount": 69,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/edolstra/flake-compat/1.0.1/018afb31-abd1-7bff-a5e4-cff7e18efb7a/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/edolstra/flake-compat/1.1.0/01948eb7-9cba-704f-bbf3-3fa956735b52/source.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -290,11 +290,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1737565460,
-        "narHash": "sha256-2vD76xQLAJ05DFWlRH6+7atsRxNMpj3wtzODbZg2F7g=",
+        "lastModified": 1737645531,
+        "narHash": "sha256-2cLk8KXpFZhMUFg61Fb8ykTp0VWqJSwcg/1o30nDYVo=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "31b0e36087e939844d6e5f0f332389b4094d124a",
+        "rev": "e22bb46c8863c30a791a4183aa9013d542cc5be5",
         "type": "github"
       },
       "original": {
@@ -393,11 +393,11 @@
     "plugin-visual-surround-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1737509329,
-        "narHash": "sha256-YIqRfRq2syl9vbt6bkkm4or/DPTL5rYYxuIF2HDj2M8=",
+        "lastModified": 1737649878,
+        "narHash": "sha256-D2sXRFmVZpnweevv+OSe9wEpqaHVqX77thrhgUC1EO8=",
         "owner": "NStefan002",
         "repo": "visual-surround.nvim",
-        "rev": "c6af83126dc01efd709bb0e09845e5549cd7ada6",
+        "rev": "78faad02f1ec36a4243f108a715b1372fcdcc0b1",
         "type": "github"
       },
       "original": {
