@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+_: let
   # Read all files in the current directory and the 'plug' directory
   files = builtins.readDir ./.;
   plugFiles = builtins.readDir ./plug;
@@ -22,32 +18,4 @@
 in {
   # Import all configuration modules automatically
   inherit imports;
-
-  # Theme options
-  options = {
-    theme = lib.mkOption {
-      default = lib.mkDefault "tokyonight";
-      type = lib.types.enum [
-        "paradise"
-        "decay"
-        "blueberry"
-        "edge-dark"
-        "mountain"
-        "tokyonight"
-        "everforest"
-        "everblush"
-        "jellybeans"
-        "aquarium"
-        "gruvbox"
-      ];
-    };
-  };
-
-  # Configuration
-  config = {
-    theme = "tokyonight";
-    extraConfigLua = ''
-      _G.theme = "${config.theme}"
-    '';
-  };
 }

@@ -1,6 +1,4 @@
-{config, ...}: let
-  colors = import ../colors/${config.theme}.nix {};
-in {
+_: {
   plugins.lualine = {
     enable = true;
     settings = {
@@ -45,7 +43,7 @@ in {
             __unkeyed = "mode";
             fmt = "string.lower";
             color = {
-              fg = colors.base04;
+              fg = "908caa";
               bg = "nil";
             };
             separator.left = "";
@@ -57,7 +55,7 @@ in {
             __unkeyed = "branch";
             icon.__unkeyed = "";
             color = {
-              fg = colors.base04;
+              fg = "908caa";
               bg = "nil";
             };
             separator.left = "";
@@ -79,7 +77,7 @@ in {
               hint = "󰝶 ";
             };
             color = {
-              fg = colors.base08;
+              fg = "eb6f92";
               bg = "nil";
             };
             separator.left = "";
@@ -127,7 +125,7 @@ in {
               unnamed = "";
             };
             color = {
-              fg = colors.base05;
+              fg = "e0def4";
               bg = "nil";
             };
             separator.left = "";
@@ -138,7 +136,7 @@ in {
           {
             __unkeyed = "location";
             color = {
-              fg = colors.base0B;
+              fg = "31748f";
               bg = "nil";
             };
             separator.left = "";
