@@ -361,11 +361,11 @@
     "plugin-snipe-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1740068257,
-        "narHash": "sha256-kO1dmYZN2stu2ffJqA8oCOD2zDfgMKGzeisnA7CFWqc=",
+        "lastModified": 1740102430,
+        "narHash": "sha256-OABP953o2FZKsXdLB1JGGDQg910qFQUBUNTKH9CVo0Y=",
         "owner": "leath-dub",
         "repo": "snipe.nvim",
-        "rev": "4e19c64e9ea12bb616c70ad3b1fa14f3afb1f395",
+        "rev": "ba8c6a21e46033c09cf738ddf057b8c36e0323b0",
         "type": "github"
       },
       "original": {
