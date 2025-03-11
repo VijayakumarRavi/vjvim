@@ -54,7 +54,7 @@ jobs:
       - name: Enable Github Cache for Nix store
         uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Enable Cachix binary cache
-        uses: cachix/cachix-action@v15
+        uses: cachix/cachix-action@v16
         with:
           name: vijay
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
