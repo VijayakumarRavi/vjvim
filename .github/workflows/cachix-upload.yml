@@ -52,7 +52,7 @@ jobs:
         if: matrix.machine.os == 'ubuntu-latest'
         uses: docker/setup-qemu-action@v3
       - name: Enable Github Cache for Nix store
-        uses: DeterminateSystems/magic-nix-cache-action@v9
+        uses: DeterminateSystems/magic-nix-cache-action@v10
       - name: Enable Cachix binary cache
         uses: cachix/cachix-action@v15
         with:
