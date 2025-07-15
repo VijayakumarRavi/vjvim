@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v4'
       - uses: 'DeterminateSystems/nix-installer-action@v16'
-      - uses: 'DeterminateSystems/flakehub-push@v5'
+      - uses: 'DeterminateSystems/flakehub-push@v6'
         with:
           name: 'VijayakumarRavi/vjvim'
           rolling: true
