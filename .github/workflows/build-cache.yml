@@ -1,0 +1,141 @@
+# yamllint disable rule:line-length rule:document-start rule:truthy
+name: 'Build, test, and cache'
+on:
+  workflow_dispatch: null
+  pull_request:
+  push:
+    paths:
+      - 'flake.lock'
+      - 'flake.nix'
+      - 'init.lua'
+      - 'lua/**'
+  # daily at 12:03 India Standard Time
+  schedule:
+    - cron: 33 18 * * *
+
+# Workflow permissions
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nix
+        uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          extra-conf: |
+            fallback = true
+            http-connections = 128
+            max-substitution-jobs = 128
+            accept-flake-config = true
+            extra-platforms = aarch64-linux x86_64-linux aarch64-darwin x86_64-darwin
+            substituters = https://nix-community.cachix.org?priority=41 https://numtide.cachix.org?priority=42 https://cache.nixos.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
+
+      - name: Update flake.lock
+        run: nix flake update
+
+      - name: Upload flake.lock
+        uses: actions/upload-artifact@v4
+        with:
+          name: flake-lock
+          path: flake.lock
+          overwrite: true
+
+  build-and-test:
+    name: Build and Test
+    needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        machine:
+          - os: macos-latest
+            arch: aarch64-darwin
+          - os: macos-latest
+            arch: x86_64-darwin
+          - os: ubuntu-latest
+            arch: x86_64-linux
+          - os: ubuntu-latest
+            arch: aarch64-linux
+    runs-on: ${{ matrix.machine.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nix
+        uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          extra-conf: |
+            fallback = true
+            http-connections = 128
+            max-substitution-jobs = 128
+            accept-flake-config = true
+            extra-platforms = aarch64-linux x86_64-linux aarch64-darwin x86_64-darwin
+            substituters = https://nix-community.cachix.org?priority=41 https://numtide.cachix.org?priority=42 https://cache.nixos.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
+
+      - name: Setup QEMU for arm architectures builds
+        if: matrix.machine.arch == 'aarch64-linux'
+        uses: docker/setup-qemu-action@v3
+
+      - name: Enable Github Cache for Nix store
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0.5.0
+        with:
+          endpoint: https://atticfly.fly.dev/
+          cache: system
+          token: ${{ secrets.ATTIC_TOKEN }}
+          push-args: -j 2
+
+      - name: Download flake.lock
+        uses: actions/download-artifact@v4
+        with:
+          name: flake-lock
+          path: .
+          merge-multiple: true
+
+      - name: Build, Check, and Test
+        run: |
+          echo "Running on ${{ matrix.machine.os }} - ${{ matrix.machine.arch }}"
+          nix build . --system ${{ matrix.machine.arch }}
+          nix flake check --system ${{ matrix.machine.arch }}
+          nix run . --system ${{ matrix.machine.arch }} -- -v
+
+  commit-lock:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: flake-lock
+          path: .
+          merge-multiple: true
+
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Bot 🤖(flake): bump flake.lock'
+          commit_user_name: Flake Bot
+          commit_options: --no-verify --signoff
+          commit_author: Flake Bot <github-actions@github.com>
+          branch: master
+          file_pattern: flake.lock
+          skip_dirty_check: false
+          skip_fetch: true
