@@ -129,7 +129,7 @@ jobs:
           merge-multiple: true
 
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'Bot 🤖(flake): bump flake.lock'
           commit_user_name: Flake Bot
