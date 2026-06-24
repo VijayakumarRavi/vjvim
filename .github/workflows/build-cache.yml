@@ -87,7 +87,7 @@ jobs:
 
       - name: Setup QEMU for arm architectures builds
         if: matrix.machine.arch == 'aarch64-linux'
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Enable Github Cache for Nix store
         uses: DeterminateSystems/magic-nix-cache-action@v9
