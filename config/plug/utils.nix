@@ -88,10 +88,6 @@
       name = "suda-vim";
       src = inputs.plugin-suda-vim;
     })
-    (pkgs.vimUtils.buildVimPlugin {
-      name = "copilot-vim";
-      src = inputs.plugin-copilot-vim;
-    })
   ];
 
   extraConfigLua = ''

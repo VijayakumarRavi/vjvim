@@ -2,12 +2,12 @@
   description = "Vijay's Neovim (vjvim) Configuration";
   nixConfig = {
     extra-substituters = [
-      "https://vijay.cachix.org?priority=1"
+      "https://atticfly.fly.dev/system?priority=1"
       "https://nix-community.cachix.org?priority=2"
       "https://cache.nixos.org?priority=3"
     ];
     extra-trusted-public-keys = [
-      "vijay.cachix.org-1:6Re6EF3Q58sxaIobAWP1QTwMUCSA0nYMrSJGUedL3Zk="
+      "system:4DUyL9UsLftxdxGfmAyxfU5TnQc+8vD/uRBryYSonss="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
@@ -39,11 +39,6 @@
 
     plugin-suda-vim = {
       url = "github:lambdalisue/vim-suda";
-      flake = false;
-    };
-
-    plugin-copilot-vim = {
-      url = "github:github/copilot.vim";
       flake = false;
     };
 

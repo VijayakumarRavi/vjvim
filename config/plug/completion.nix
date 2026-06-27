@@ -82,7 +82,6 @@
     lspkind = {
       enable = true;
       symbolMap = {
-        Copilot = "";
         Supermaven = "";
       };
       extraOptions = {
