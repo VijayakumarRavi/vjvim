@@ -25,7 +25,6 @@
         sources = [
           {name = "nvim_lsp";}
           {name = "supermaven";}
-          {name = "emoji";}
           {
             name = "buffer"; # text within current buffer
             option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
@@ -76,15 +75,12 @@
     cmp-cmdline = {
       enable = false;
     }; # autocomplete for cmdline
-    cmp-emoji = {
-      enable = true;
-    }; # emoji
     lspkind = {
       enable = true;
-      symbolMap = {
-        Supermaven = "";
-      };
-      extraOptions = {
+      settings = {
+        symbol_map = {
+          Supermaven = "";
+        };
         maxwidth = 50;
         ellipsis_char = "...";
       };

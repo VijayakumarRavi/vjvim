@@ -24,35 +24,21 @@
     ## automatically highlighting other uses of the word under the cursor
     illuminate = {
       enable = true;
-      underCursor = false;
-      filetypesDenylist = [
-        "Outline"
-        "TelescopePrompt"
-        "alpha"
-        "harpoon"
-        "reason"
-      ];
+      settings = {
+        under_cursor = false;
+        filetypes_denylist = [
+          "Outline"
+          "TelescopePrompt"
+          "alpha"
+          "harpoon"
+          "reason"
+        ];
+      };
     };
 
     harpoon = {
       enable = true;
       enableTelescope = true;
-      keymapsSilent = true;
-      keymaps = {
-        addFile = "A";
-        toggleQuickMenu = "H";
-        navFile = {
-          "1" = "!";
-          "2" = "@";
-          "3" = "#";
-          "4" = "$";
-          "5" = "%";
-          "6" = "^";
-          "7" = "&";
-          "8" = "*";
-          "9" = "(";
-        };
-      };
     };
 
     toggleterm = {
@@ -150,6 +136,105 @@
       action = ":lua require('snipe').open_buffer_menu()<CR>";
       options = {
         desc = "Toggle Snipe";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "A";
+      action.__raw = "function() require('harpoon'):list():add() end";
+      options = {
+        desc = "Harpoon Add File";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "H";
+      action.__raw = "function() require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) end";
+      options = {
+        desc = "Harpoon Toggle Quick Menu";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "!";
+      action.__raw = "function() require('harpoon'):list():select(1) end";
+      options = {
+        desc = "Harpoon Select 1";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "@";
+      action.__raw = "function() require('harpoon'):list():select(2) end";
+      options = {
+        desc = "Harpoon Select 2";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "#";
+      action.__raw = "function() require('harpoon'):list():select(3) end";
+      options = {
+        desc = "Harpoon Select 3";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "$";
+      action.__raw = "function() require('harpoon'):list():select(4) end";
+      options = {
+        desc = "Harpoon Select 4";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "%";
+      action.__raw = "function() require('harpoon'):list():select(5) end";
+      options = {
+        desc = "Harpoon Select 5";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "^";
+      action.__raw = "function() require('harpoon'):list():select(6) end";
+      options = {
+        desc = "Harpoon Select 6";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "&";
+      action.__raw = "function() require('harpoon'):list():select(7) end";
+      options = {
+        desc = "Harpoon Select 7";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "*";
+      action.__raw = "function() require('harpoon'):list():select(8) end";
+      options = {
+        desc = "Harpoon Select 8";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "(";
+      action.__raw = "function() require('harpoon'):list():select(9) end";
+      options = {
+        desc = "Harpoon Select 9";
         silent = true;
       };
     }

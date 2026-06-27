@@ -107,7 +107,48 @@ _: {
           }
         ];
         lualine_x = [
-          ""
+          {
+            __unkeyed = {
+              __raw = ''
+                function()
+                  local clients = vim.lsp.get_clients({ bufnr = 0 })
+                  if #clients == 0 then
+                      return ""
+                  end
+                  local names = {}
+                  for _, client in ipairs(clients) do
+                      table.insert(names, client.name)
+                  end
+                  return table.concat(names, ", ")
+                end
+              '';
+            };
+            icon = " ";
+            color = {
+              fg = "908caa";
+              bg = "nil";
+            };
+            separator.left = "";
+            separator.right = "";
+          }
+          {
+            __unkeyed = "encoding";
+            color = {
+              fg = "908caa";
+              bg = "nil";
+            };
+            separator.left = "";
+            separator.right = "";
+          }
+          {
+            __unkeyed = "fileformat";
+            color = {
+              fg = "908caa";
+              bg = "nil";
+            };
+            separator.left = "";
+            separator.right = "";
+          }
         ];
         lualine_y = [
           {
@@ -135,6 +176,21 @@ _: {
         lualine_z = [
           {
             __unkeyed = "location";
+            color = {
+              fg = "31748f";
+              bg = "nil";
+            };
+            separator.left = "";
+            separator.right = "";
+          }
+          {
+            __unkeyed = {
+              __raw = ''
+                function()
+                  return tostring(vim.api.nvim_buf_line_count(0)) .. " lines"
+                end
+              '';
+            };
             color = {
               fg = "31748f";
               bg = "nil";

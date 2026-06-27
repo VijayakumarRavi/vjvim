@@ -59,14 +59,12 @@
         "aarch64-linux"
         "x86_64-linux"
         "aarch64-darwin"
-        "x86_64-darwin"
       ];
 
       perSystem = {
         system,
         pkgs,
         self',
-        lib,
         ...
       }: let
         nixvim' = nixvim.legacyPackages.${system};
@@ -115,17 +113,9 @@
               };
               statix = {
                 enable = true;
-                files = "\\.nix$";
-                name = "statix-fix";
-                entry = "statix fix";
-              };
-              git-pull = {
-                enable = true;
-                name = "git-pull-remort";
-                always_run = true;
-                pass_filenames = false;
-                stages = ["post-commit"];
-                entry = "git pull --rebase --quiet --autostash";
+                settings = {
+                  ignore = [".envrc"];
+                };
               };
             };
           };
