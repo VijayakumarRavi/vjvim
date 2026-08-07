@@ -57,11 +57,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1785828668,
-        "narHash": "sha256-8fsyqeO+mJqvIzeO4xIpgJe/f7MTbbVTEC6RT6WSXNs=",
+        "lastModified": 1785967620,
+        "narHash": "sha256-IItrdb7Puk05RqOBWZYFC5X6Wl1sJmCfh5MWVHw5iMM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e72e4f299401a3689d4b3d5fc6496b11db7064eb",
+        "rev": "b7c2ada94fe99c15b0dbcf4d11fd7850b957a436",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
     "plugin-hlchunk-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1783163818,
-        "narHash": "sha256-rSQnHnks068egYd9AlfuC43F3BcysyMTYnlaUFjlDM4=",
+        "lastModified": 1786015006,
+        "narHash": "sha256-1ltHngFFCpbsU+k4osyjl4FKXn0AX7bLz+pCG9My+ac=",
         "owner": "shellRaining",
         "repo": "hlchunk.nvim",
-        "rev": "fb5a16ecc4ff15772189679ffdede6ee879288ec",
+        "rev": "4ddc056e4ca45f1c7dc6aa21935df710b263b1aa",
         "type": "github"
       },
       "original": {
