@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   plugins.conform-nvim = {
     enable = true;
     settings = {
@@ -11,17 +11,20 @@
       formatters_by_ft = {
         lua = ["stylua"];
         nix = ["alejandra"];
-        markdown = [
-          [
-            "prettierd"
-            "prettier"
-          ]
-        ];
-        yaml = [
-          "yamllint"
-          "yamlfmt"
-        ];
+        markdown = {
+          __unkeyed-1 = "prettierd";
+          __unkeyed-2 = "prettier";
+          stop_after_first = true;
+        };
+        yaml = ["yamlfmt"];
       };
     };
   };
+
+  extraPackages = with pkgs; [
+    prettierd
+    yamlfmt
+    stylua
+    alejandra
+  ];
 }

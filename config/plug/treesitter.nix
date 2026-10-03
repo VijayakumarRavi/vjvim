@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  extraPackages = [pkgs.tree-sitter];
   plugins = {
     treesitter = {
       enable = true;

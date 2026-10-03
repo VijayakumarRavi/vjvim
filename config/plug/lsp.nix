@@ -288,6 +288,21 @@
     require('lspconfig.ui.windows').default_options = {
       border = _border
     }
+
+    vim.filetype.add({
+      extension = {
+        gotmpl = "gotmpl",
+      },
+      pattern = {
+        [".*ansible.*%.ya?ml"] = "yaml.ansible",
+        [".*playbook.*%.ya?ml"] = "yaml.ansible",
+        ["docker%-compose.*%.ya?ml"] = "yaml.docker-compose",
+        ["compose.*%.ya?ml"] = "yaml.docker-compose",
+        [".*gitlab%-ci.*%.ya?ml"] = "yaml.gitlab",
+        [".*/templates/.*%.ya?ml"] = "yaml.helm-values",
+        ["values.*%.ya?ml"] = "yaml.helm-values",
+      },
+    })
   '';
 
   keymaps = [

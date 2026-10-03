@@ -10,6 +10,13 @@
 
     which-key.enable = true;
 
+    mini = {
+      enable = true;
+      modules = {
+        icons = {};
+      };
+    };
+
     comment.enable = true; # commenting plugin for neovim
 
     nvim-ufo.enable = true; # for better folding
