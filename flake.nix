@@ -2,7 +2,7 @@
   description = "Vijay's Neovim (vjvim) Configuration";
   nixConfig = {
     extra-substituters = [
-      "https://cache.nixos.org?priority=1"
+      "https://cache.vjlab.dev?priority=1"
       "https://nix-community.cachix.org?priority=2"
       "https://cache.nixos.org?priority=3"
     ];

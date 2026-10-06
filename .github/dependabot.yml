@@ -6,4 +6,17 @@ updates:
     schedule:
       interval: daily
       time: "10:00"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns: ["*"]
+
+  - package-ecosystem: "nix"
+    directory: "/"
+    schedule:
+      interval: daily
+      time: "11:00"
+    open-pull-requests-limit: 5
+    groups:
+      nix-inputs:
+        patterns: ["*"]

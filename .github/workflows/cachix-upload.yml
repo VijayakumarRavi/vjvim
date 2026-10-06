@@ -9,10 +9,11 @@ on:
       - 'flake.nix'
       - 'config/**'
   # daily at 12:03 India Standard Time
-  schedule:
-    - cron: 33 18 * * *
+  # schedule:
+  #  - cron: 33 18 * * *
 # Workflow permissions
 permissions:
+  actions: write
   contents: write
   id-token: write
 jobs:
@@ -24,8 +25,6 @@ jobs:
         machine:
           - os: macos-latest
             arch: aarch64-darwin
-          - os: macos-latest
-            arch: x86_64-darwin
           - os: ubuntu-latest
             arch: x86_64-linux
           - os: ubuntu-latest
@@ -37,35 +36,43 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Nix
-        uses: DeterminateSystems/nix-installer-action@v23
+        uses: cachix/install-nix-action@v31
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          extra-conf: |
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
             fallback = true
             http-connections = 128
             max-substitution-jobs = 128
             accept-flake-config = true
             extra-platforms = aarch64-linux x86_64-linux aarch64-darwin x86_64-darwin
-            substituters = https://nix-community.cachix.org?priority=41 https://numtide.cachix.org?priority=42 https://cache.nixos.org/
-            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
+            substituters = https://cache.vjlab.dev https://nix-community.cachix.org?priority=41 https://numtide.cachix.org?priority=42 https://cache.nixos.org/
+            trusted-public-keys = cache.vjlab.dev-1:06uruRidWNTTjXEq5/yBE/kmIv46S8pD/lK+JFlrjGk= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=
       - name: Setup QEMU for arm architectures builds
         if: matrix.machine.os == 'ubuntu-latest'
         uses: docker/setup-qemu-action@v4
-      - name: Enable Github Cache for Nix store
-        uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Enable Cachix binary cache
-        uses: cachix/cachix-action@v15
+      - name: Restore and save Nix store
+        uses: nix-community/cache-nix-action@v7
         with:
-          name: vijay
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          primary-key: nix-${{ matrix.machine.os }}-${{ matrix.machine.arch }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
+          restore-prefixes-first-match: nix-${{ matrix.machine.os }}-${{ matrix.machine.arch }}-
+          gc-max-store-size-linux: 2G
+          purge: true
+          purge-prefixes: nix-${{ matrix.machine.os }}-${{ matrix.machine.arch }}-
+          purge-created: 0
+          purge-primary-key: never
+      - name: Setup niks3 binary cache
+        uses: Mic92/niks3-action@v1
+        with:
+          server-url: https://cache.vjlab.dev
       - name: Update flake.lock
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: nix flake update
       - name: Run and test the config
         run: |
           echo "Running on ${{ matrix.machine.os }} - ${{ matrix.machine.arch }}"
           nix run . -- -v
       - name: Commit and Push updated flake.lock
-        if: matrix.machine.arch == 'x86_64-linux'
+        if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && matrix.machine.arch == 'x86_64-linux'
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'Bot 🤖(flake): bump flake.lock'
